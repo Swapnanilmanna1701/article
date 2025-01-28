@@ -3,7 +3,6 @@
 import "./globals.css";
 
 import { store } from "@/services/store";
-import App from "./page";
 
 import { Provider } from "react-redux";
 
@@ -15,10 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider store={store}>
-        <body className={` antialiased`}>
-          {children}
-          <App />
-        </body>
+        <body className={` antialiased`}>{children}</body>
       </Provider>
     </html>
   );
