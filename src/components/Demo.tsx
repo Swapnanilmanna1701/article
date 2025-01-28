@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 //import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "@/services/article";
+import { Loader2 } from "lucide-react";
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -12,23 +13,24 @@ const Demo = () => {
   const [allArticles, setAllArticles] = useState<
     { url: string; summary: string }[]
   >([]);
-  const [copied, setCopied] = useState("");
+  const [copied, setCopied] = useState<string | false>(false);
 
   // RTK lazy query
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
   // Load data from localStorage on mount
   useEffect(() => {
-    const articlesFromLocalStorage = JSON.parse(
-      localStorage.getItem("articles")
-    );
+    const existingArticles = localStorage.getItem("articles");
+    if (existingArticles) {
+      const articlesFromLocalStorage = JSON.parse(existingArticles);
 
-    if (articlesFromLocalStorage) {
-      setAllArticles(articlesFromLocalStorage);
+      if (articlesFromLocalStorage) {
+        setAllArticles(articlesFromLocalStorage);
+      }
     }
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const existingArticle = allArticles.find(
@@ -50,14 +52,14 @@ const Demo = () => {
   };
 
   // copy the url and toggle the icon for user feedback
-  const handleCopy = (copyUrl) => {
+  const handleCopy = (copyUrl: string) => {
     setCopied(copyUrl);
     navigator.clipboard.writeText(copyUrl);
-    setTimeout(() => setCopied(false), 3000);
+    setTimeout(() => setCopied(""), 3000);
   };
 
   const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 || e.key === "enter") {
       handleSubmit(e);
     }
   };
@@ -119,14 +121,15 @@ const Demo = () => {
       {/* Display Result */}
       <div className="my-10 max-w-full flex justify-center items-center">
         {isFetching ? (
-          <img src={loader} alt="loader" className="w-20 h-20 object-contain" />
+          // <img src={loader} alt="loader" className="w-20 h-20 object-contain" />
+          <Loader2 className="size-8" />
         ) : error ? (
           <p className="font-inter font-bold text-black text-center">
-            Well, that wasn't supposed to happen...
+            Well, that wasn&apos;t supposed to happen...
             <br />
-            <span className="font-satoshi font-normal text-gray-700">
-              {error?.data?.error}
-            </span>
+            {/* <span className="font-satoshi font-normal text-gray-700">
+              {error.data}
+            </span> */}
           </p>
         ) : (
           article.summary && (

@@ -1,6 +1,5 @@
+import { env } from "@/env";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const rapidApiKey = process.env.RAPID_API_ARTICLE_KEY;
 
 export const articleApi = createApi({
   reducerPath: "articleApi",
@@ -8,10 +7,7 @@ export const articleApi = createApi({
     baseUrl: "https://article-extractor-and-summarizer.p.rapidapi.com/",
     prepareHeaders: (headers) => {
       // if you are cloning this than add your own API key from rapid API
-      headers.set(
-        "X-RapidAPI-Key",
-        "46d0a98eefmsh52203bbdf0b3dfap1bba50jsn41f26e2422ea"
-      );
+      headers.set("X-RapidAPI-Key", env.NEXT_PUBLIC_RAPID_API_KEY);
       headers.set(
         "X-RapidAPI-Host",
         "article-extractor-and-summarizer.p.rapidapi.com"
