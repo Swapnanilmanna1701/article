@@ -1,15 +1,11 @@
-"use client"
-import type { Metadata } from "next";
+"use client";
 //import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import App from "./page";
 import { store } from "@/services/store";
+import App from "./page";
 
 import { Provider } from "react-redux";
-
-
-
 
 export default function RootLayout({
   children,
@@ -18,14 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={` antialiased`}
-      >
-        {children}
-        <Provider store={store}>
-      <App />
-    </Provider>
-      </body>
+      <Provider store={store}>
+        <body className={` antialiased`}>
+          {children}
+          <App />
+        </body>
+      </Provider>
     </html>
   );
 }
