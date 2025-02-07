@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+/*
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them!
 */
 
 .main {
@@ -72,7 +72,7 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 h-screen flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6 space-y-10;
 }
 
 .black_btn {
@@ -80,7 +80,7 @@
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] sm:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-violet-500 to-cyan-300;
 }
 
 .orange_gradient {
