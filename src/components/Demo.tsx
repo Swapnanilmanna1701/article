@@ -63,7 +63,7 @@ const Demo = () => {
   };
 
   return (
-    <section className="mt-16 w-full max-w-xl">
+    <section className="mt-16 w-full max-w-xl bg-black">
       {/* Search */}
       <div className="flex flex-col w-full gap-2">
         <form

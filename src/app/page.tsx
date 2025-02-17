@@ -5,7 +5,7 @@ import "./globals.css";
 
 const App = () => {
   return (
-    <main>
+    <main >
       <div className="main">
         <div className="gradient" />
       </div>
